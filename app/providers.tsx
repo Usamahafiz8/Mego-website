@@ -1,86 +1,59 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useThemeStore } from '@/lib/store/themeStore';
 import { useAuthStore } from '@/lib/store/authStore';
 
-// Create a single QueryClient instance (singleton pattern for better performance)
+// Create a single QueryClient instance
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
       retry: 1,
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      cacheTime: 10 * 60 * 1000, // 10 minutes
+      staleTime: 5 * 60 * 1000,
+      cacheTime: 10 * 60 * 1000,
     },
   },
 });
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  const { darkMode, setDarkMode } = useThemeStore();
-  const { user } = useAuthStore();
-  const [mounted, setMounted] = useState(false);
+  const { setDarkMode } = useThemeStore();
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    // Initialize theme after mount - client-side only
-    if (typeof window === 'undefined' || !mounted) return;
-    
-    // Only set if not already set by ThemeScript
-    const htmlHasDark = document.documentElement.classList.contains('dark');
-    
-    try {
-      const savedTheme = localStorage.getItem('mego-theme');
-      if (savedTheme) {
-        const parsed = JSON.parse(savedTheme);
-        if (parsed.state?.darkMode !== undefined) {
-          // Only update if different from current state
-          if (parsed.state.darkMode !== htmlHasDark) {
-            setDarkMode(parsed.state.darkMode);
+    // Hydrate the store from localStorage after mount
+    const hydrate = async () => {
+      const { persist } = await import('zustand/middleware');
+      const storage = (useThemeStore as any).persist?.getOptions?.()?.storage;
+      if (storage) {
+        try {
+          const savedState = await storage.getItem('mego-theme');
+          if (savedState) {
+            const parsed = JSON.parse(savedState);
+            if (parsed.state?.darkMode !== undefined) {
+              // Store is already hydrated by zustand, just ensure DOM is in sync
+              if (parsed.state.darkMode) {
+                document.documentElement.classList.add('dark');
+              } else {
+                document.documentElement.classList.remove('dark');
+              }
+            }
           }
-          return;
+        } catch (e) {
+          console.error('Failed to hydrate theme:', e);
         }
       }
-    } catch (error) {
-      // Ignore parse errors
-    }
-    
-    // Check system preference only if no saved theme
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (prefersDark !== htmlHasDark) {
-      setDarkMode(prefersDark);
-    }
-  }, [mounted, setDarkMode]);
+    };
 
-  // Sync user's dark mode preference
-  useEffect(() => {
-    if (typeof window === 'undefined' || !mounted) return;
-    if (user?.darkMode !== undefined) {
-      setDarkMode(user.darkMode);
-    }
-  }, [user, setDarkMode, mounted]);
-
-  // Apply dark mode class to document
-  useEffect(() => {
-    if (typeof window === 'undefined' || !mounted) return;
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode, mounted]);
+    hydrate();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div suppressHydrationWarning>
-        {children}
-      </div>
+      {children}
     </QueryClientProvider>
   );
 }
+
 

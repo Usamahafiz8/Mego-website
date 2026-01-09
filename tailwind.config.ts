@@ -10,29 +10,32 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Primary: Blue-900 (Deep professional blue)
         primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a', // Main blue-900
+          950: '#172554',
         },
-        secondary: {
-          50: '#faf5ff',
-          100: '#f3e8ff',
-          200: '#e9d5ff',
-          300: '#d8b4fe',
-          400: '#c084fc',
-          500: '#a855f7',
-          600: '#9333ea',
-          700: '#7e22ce',
-          800: '#6b21a8',
-          900: '#581c87',
+        // Yellow accent for CTAs
+        accent: {
+          50: '#fefce8',
+          100: '#fef9c3',
+          200: '#fef08a',
+          300: '#fde047',
+          400: '#fbbf24', // Main yellow accent
+          500: '#f59e0b',
+          600: '#d97706',
+          700: '#b45309',
+          800: '#92400e',
+          900: '#78350f',
         },
       },
       fontFamily: {
@@ -47,8 +50,9 @@ const config: Config = {
         '2xl': ['1.5rem', { lineHeight: '2rem' }],
         '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
         '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
-        '5xl': ['3rem', { lineHeight: '1' }],
+        '5xl': ['3rem', { lineHeight: '1.2' }],
         '6xl': ['3.75rem', { lineHeight: '1' }],
+        '7xl': ['4.5rem', { lineHeight: '1' }],
       },
       spacing: {
         '18': '4.5rem',
@@ -61,11 +65,14 @@ const config: Config = {
         '3xl': '2rem',
       },
       boxShadow: {
-        'soft': '0 2px 15px rgba(0, 0, 0, 0.08)',
-        'medium': '0 4px 25px rgba(0, 0, 0, 0.1)',
-        'large': '0 10px 40px rgba(0, 0, 0, 0.15)',
-        'glow': '0 0 20px rgba(2, 132, 199, 0.3)',
-        'glow-lg': '0 0 30px rgba(2, 132, 199, 0.4)',
+        // Luxury shadows with blue-900 tint
+        'soft': '0 2px 8px rgba(30, 58, 138, 0.08)',
+        'medium': '0 4px 16px rgba(30, 58, 138, 0.12)',
+        'large': '0 10px 32px rgba(30, 58, 138, 0.15)',
+        'luxury': '0 16px 48px rgba(30, 58, 138, 0.18)',
+        'glow': '0 0 20px rgba(30, 58, 138, 0.3)',
+        'glow-lg': '0 0 30px rgba(30, 58, 138, 0.4)',
+        'glow-yellow': '0 0 20px rgba(251, 191, 36, 0.3)',
       },
       animation: {
         'spin-slow': 'spin 3s linear infinite',
@@ -76,6 +83,7 @@ const config: Config = {
         'scaleIn': 'scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         'shimmer': 'shimmer 2s infinite linear',
         'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+        'float': 'float 3s ease-in-out infinite',
       },
       transitionTimingFunction: {
         'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -83,6 +91,11 @@ const config: Config = {
       },
       backdropBlur: {
         'xs': '2px',
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-primary': 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
+        'gradient-accent': 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
       },
     },
   },

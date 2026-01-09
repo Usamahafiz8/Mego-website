@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
-import { ThemeScript } from '@/components/ThemeScript';
 import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -20,8 +19,31 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('mego-theme');
+                  if (theme) {
+                    var parsed = JSON.parse(theme);
+                    if (parsed.state && parsed.state.darkMode) {
+                      document.documentElement.classList.add('dark');
+                    }
+                  } else {
+                    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    if (prefersDark) {
+                      document.documentElement.classList.add('dark');
+                    }
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className={inter.className} suppressHydrationWarning>
-        <ThemeScript />
         <Providers>
           {children}
           <Toaster
@@ -39,6 +61,7 @@ export default function RootLayout({
     </html>
   );
 }
+
 
 
 

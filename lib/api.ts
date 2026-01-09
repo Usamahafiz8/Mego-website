@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // API Configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ; //|| 'http://3.236.171.71'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL; //|| 'http://3.91.9.196'
 const API_VERSION = 'v1';
 const FULL_API_URL = `${API_BASE_URL}/${API_VERSION}`;
 
@@ -17,7 +17,6 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true,
   timeout: 10000, // 10 second timeout
 });
 
@@ -29,7 +28,7 @@ api.interceptors.request.use(
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
-      
+
       // Log request in development
       if (process.env.NODE_ENV === 'development') {
         console.log('📤 API Request:', {
@@ -74,7 +73,7 @@ api.interceptors.response.use(
       code: error.code,
       requestData: error.config?.data,
     });
-    
+
     if (error.response?.status === 401) {
       if (typeof window !== 'undefined') {
         localStorage.removeItem('token');
@@ -85,7 +84,7 @@ api.interceptors.response.use(
         }
       }
     }
-    
+
     return Promise.reject(error);
   }
 );
