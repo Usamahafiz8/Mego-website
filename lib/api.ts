@@ -1,13 +1,19 @@
 import axios from 'axios';
 
 // API Configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL; //|| 'http://3.91.9.196'
+// Use Next.js API proxy route to avoid CORS issues
+// The proxy route at /api/[...path] will forward requests to the backend
+const API_BASE_URL = typeof window !== 'undefined' 
+  ? '/api'  // Client-side: use Next.js API proxy
+  : `${process.env.NEXT_PUBLIC_API_URL || 'http://3.236.171.71'}/v1`; // Server-side: direct backend call
 const API_VERSION = 'v1';
-const FULL_API_URL = `${API_BASE_URL}/${API_VERSION}`;
+const FULL_API_URL = typeof window !== 'undefined' 
+  ? '/api'  // Client-side: proxy handles version
+  : `${process.env.NEXT_PUBLIC_API_URL || 'http://3.236.171.71'}/${API_VERSION}`;
 
 // Log API URL in development
 if (typeof window !== 'undefined') {
-  console.log('🔗 API Base URL:', API_BASE_URL);
+  console.log('🔗 API Base URL (using proxy):', API_BASE_URL);
   console.log('🔗 Full API URL:', FULL_API_URL);
 }
 
@@ -90,10 +96,13 @@ api.interceptors.response.use(
 );
 
 // Helper to get image URL
+// Images can be loaded directly from the backend (no proxy needed)
 export const getImageUrl = (path: string | null | undefined): string => {
   if (!path) return '/placeholder-image.jpg';
   if (path.startsWith('http')) return path;
-  return `${API_BASE_URL}${path.startsWith('/') ? path : `/${path}`}`;
+  // Use backend URL directly for images (not through proxy)
+  const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://3.236.171.71';
+  return `${backendUrl}${path.startsWith('/') ? path : `/${path}`}`;
 };
 
 // Auth APIs
