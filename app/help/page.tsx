@@ -49,7 +49,7 @@ export default function HelpPage() {
 
   const handleSubmitTicket = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!isAuthenticated) {
       toast.error('Please login to submit a support ticket');
       router.push('/login');
@@ -75,22 +75,24 @@ export default function HelpPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-black">
       <Header />
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 flex items-center">
-            <HelpCircle className="w-8 h-8 mr-3" />
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="mb-12 animate-fadeInUp">
+          <h1 className="text-4xl md:text-5xl font-bold text-primary-900 dark:text-white mb-4 flex items-center gap-4">
+            <div className="p-3 bg-gradient-to-br from-primary-100 to-secondary-100 dark:from-primary-900/50 dark:to-secondary-900/50 rounded-2xl">
+              <HelpCircle className="w-8 h-8 text-primary-600 dark:text-primary-400" />
+            </div>
             Help & Support
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-gray-600 dark:text-gray-400 text-lg">
             Find answers to common questions or contact our support team
           </p>
         </div>
 
         {/* Contact Info */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 animate-fadeInUp" style={{ animationDelay: '100ms' }}>
+          <div className="bg-white dark:bg-gray-900/50 rounded-2xl border-2 border-gray-100 dark:border-gray-800 p-6 shadow-soft hover:shadow-medium transition-all duration-300">
             <div className="flex items-center space-x-4 mb-4">
               <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
                 <Phone className="w-6 h-6 text-primary-600 dark:text-primary-400" />
@@ -105,7 +107,7 @@ export default function HelpPage() {
             </p>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+          <div className="bg-white dark:bg-gray-900/50 rounded-2xl border-2 border-gray-100 dark:border-gray-800 p-6 shadow-soft hover:shadow-medium transition-all duration-300">
             <div className="flex items-center space-x-4 mb-4">
               <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
                 <Mail className="w-6 h-6 text-green-600 dark:text-green-400" />
@@ -122,7 +124,7 @@ export default function HelpPage() {
         </div>
 
         {/* FAQs */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 mb-8">
+        <div className="bg-white dark:bg-gray-900/50 rounded-2xl border-2 border-gray-100 dark:border-gray-800 p-6 md:p-8 mb-8 animate-fadeInUp shadow-soft" style={{ animationDelay: '200ms' }}>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
             Frequently Asked Questions
           </h2>
@@ -156,7 +158,7 @@ export default function HelpPage() {
         </div>
 
         {/* Support Ticket Form */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+        <div className="bg-white dark:bg-gray-900/50 rounded-2xl border-2 border-gray-100 dark:border-gray-800 p-6 md:p-8 animate-fadeInUp shadow-soft" style={{ animationDelay: '300ms' }}>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
             <MessageSquare className="w-6 h-6 mr-2" />
             Submit Support Ticket

@@ -79,7 +79,7 @@ export default function FavoritesPage() {
 
     if (isAuthenticated) {
       fetchFavorites();
-      
+
       // Auto-refresh every 30 seconds
       const interval = setInterval(() => {
         fetchFavorites();
@@ -121,7 +121,7 @@ export default function FavoritesPage() {
     const now = new Date();
     const diff = now.getTime() - date.getTime();
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    
+
     if (days === 0) return 'Today';
     if (days === 1) return 'Yesterday';
     if (days < 7) return `${days} days ago`;
@@ -164,24 +164,24 @@ export default function FavoritesPage() {
 
   if (!isAuthenticated || loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-black">
       <Header />
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-8 animate-fadeInUp">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              <h1 className="text-4xl md:text-5xl font-bold text-primary-900 dark:text-white mb-4">
                 My Favorites ❤️
               </h1>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-gray-600 dark:text-gray-400 text-lg">
                 {favorites.length} saved {favorites.length === 1 ? 'item' : 'items'}
               </p>
             </div>
@@ -241,21 +241,19 @@ export default function FavoritesPage() {
                 <div className="flex items-center space-x-2 ml-auto">
                   <button
                     onClick={() => setViewMode('grid')}
-                    className={`p-2 rounded-lg transition-colors ${
-                      viewMode === 'grid'
+                    className={`p-2 rounded-lg transition-colors ${viewMode === 'grid'
                         ? 'bg-primary-600 text-white'
                         : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
-                    }`}
+                      }`}
                   >
                     <Grid className="w-5 h-5" />
                   </button>
                   <button
                     onClick={() => setViewMode('list')}
-                    className={`p-2 rounded-lg transition-colors ${
-                      viewMode === 'list'
+                    className={`p-2 rounded-lg transition-colors ${viewMode === 'list'
                         ? 'bg-primary-600 text-white'
                         : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
-                    }`}
+                      }`}
                   >
                     <List className="w-5 h-5" />
                   </button>
@@ -267,14 +265,14 @@ export default function FavoritesPage() {
 
         {/* Results */}
         {filteredFavorites.length === 0 ? (
-          <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+          <div className="text-center py-12 bg-white dark:bg-gray-900/50 rounded-2xl border-2 border-gray-100 dark:border-gray-800 shadow-soft">
             <Heart className={`w-16 h-16 mx-auto mb-4 ${favorites.length === 0 ? 'text-gray-400' : 'text-red-400'}`} />
             <p className="text-gray-600 dark:text-gray-400 mb-4">
               {favorites.length === 0
                 ? 'No favorites yet'
                 : searchQuery || filterCategory !== 'all'
-                ? 'No favorites match your filters'
-                : 'No favorites found'}
+                  ? 'No favorites match your filters'
+                  : 'No favorites found'}
             </p>
             {favorites.length === 0 ? (
               <Link
@@ -300,7 +298,7 @@ export default function FavoritesPage() {
             {filteredFavorites.map((favorite) => (
               <div
                 key={favorite.id}
-                className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden card-hover group relative"
+                className="bg-white dark:bg-gray-900/50 rounded-2xl border-2 border-gray-100 dark:border-gray-800 overflow-hidden card-hover group relative shadow-soft"
               >
                 <button
                   onClick={(e) => {
@@ -313,7 +311,7 @@ export default function FavoritesPage() {
                 >
                   <Trash2 className="w-4 h-4 text-red-600" />
                 </button>
-                <Link 
+                <Link
                   href={`/ads/${favorite.ad.id}`}
                   className="block"
                   onClick={(e) => {
@@ -380,7 +378,7 @@ export default function FavoritesPage() {
                 className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden card-hover group"
               >
                 <div className="flex flex-col md:flex-row">
-                  <Link 
+                  <Link
                     href={`/ads/${favorite.ad.id}`}
                     className="flex-shrink-0 md:w-48 h-48 relative bg-gray-200 dark:bg-gray-700"
                     onClick={(e) => {
@@ -407,7 +405,7 @@ export default function FavoritesPage() {
                   <div className="flex-1 p-4 flex flex-col md:flex-row md:items-center md:justify-between">
                     <div className="flex-1">
                       <div className="flex items-start justify-between mb-2">
-                        <Link 
+                        <Link
                           href={`/ads/${favorite.ad.id}`}
                           className="flex-1"
                           onClick={(e) => {

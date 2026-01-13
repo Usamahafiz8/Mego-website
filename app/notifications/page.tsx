@@ -89,7 +89,7 @@ export default function NotificationsPage() {
 
   if (!isAuthenticated || loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
       </div>
     );
@@ -98,15 +98,15 @@ export default function NotificationsPage() {
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-black">
       <Header />
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex items-center justify-between mb-8">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="flex items-center justify-between mb-12 animate-fadeInUp">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-4xl md:text-5xl font-bold text-primary-900 dark:text-white mb-4">
               Notifications
             </h1>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-600 dark:text-gray-400 text-lg">
               {unreadCount > 0 ? `${unreadCount} unread notifications` : 'All caught up!'}
             </p>
           </div>
@@ -121,26 +121,25 @@ export default function NotificationsPage() {
         </div>
 
         {notifications.length === 0 ? (
-          <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+          <div className="text-center py-12 bg-white dark:bg-gray-900/50 rounded-2xl border-2 border-gray-100 dark:border-gray-800 shadow-soft animate-fadeInUp">
             <Bell className="w-16 h-16 text-gray-400 mx-auto mb-4" />
             <p className="text-gray-600 dark:text-gray-400">No notifications yet</p>
           </div>
         ) : (
           <div className="space-y-4">
-            {notifications.map((notification) => (
+            {notifications.map((notification, index) => (
               <div
                 key={notification.id}
-                className={`bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 card-hover ${
-                  !notification.read ? 'border-l-4 border-l-primary-500' : ''
-                }`}
+                className={`bg-white dark:bg-gray-900/50 rounded-2xl border-2 border-gray-100 dark:border-gray-800 p-6 card-hover shadow-soft animate-fadeInUp ${!notification.read ? 'border-l-4 border-l-primary-500' : ''
+                  }`}
+                style={{ animationDelay: `${index * 50}ms` }}
               >
                 <div className="flex items-start space-x-4">
                   <div
-                    className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                      !notification.read
+                    className={`w-12 h-12 rounded-full flex items-center justify-center ${!notification.read
                         ? 'bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400'
                         : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
-                    }`}
+                      }`}
                   >
                     {getNotificationIcon(notification.type)}
                   </div>

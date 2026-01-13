@@ -36,13 +36,13 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center group focus:outline-none" suppressHydrationWarning>
-            <div className="relative h-10 w-[120px] flex items-center justify-center bg-white dark:bg-gray-900 rounded-lg px-3 py-1 group-hover:scale-105 transition-all duration-300">
+            <div className="relative h-12 w-[150px] flex items-center justify-center bg-white dark:bg-gray-900 rounded-lg px-3 py-1 group-hover:scale-105 transition-all duration-300">
               <Image
                 src="/images/mego-logo.png"
                 alt="MEGO Logo"
-                width={120}
-                height={40}
-                className="h-full w-auto object-contain"
+                width={150}
+                height={48}
+                className="h-18 w-auto object-contain"
                 priority
               />
             </div>

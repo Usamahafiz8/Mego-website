@@ -6,9 +6,9 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { useAuthStore } from '@/lib/store/authStore';
 import { authApi, getImageUrl } from '@/lib/api';
-import { 
-  User, Heart, Wallet, Gift, TrendingUp, Eye, ArrowLeftRight, 
-  FileText, MapPin, Settings, HelpCircle, Shield, Camera, 
+import {
+  User, Heart, Wallet, Gift, TrendingUp, Eye, ArrowLeftRight,
+  FileText, MapPin, Settings, HelpCircle, Shield, Camera,
   Mail, Phone, LogOut, ChevronRight, CheckCircle2
 } from 'lucide-react';
 import Link from 'next/link';
@@ -66,7 +66,7 @@ export default function ProfilePage() {
     // }
 
     if (isAuthenticated) {
-    fetchUser();
+      fetchUser();
     } else {
       setLoading(false);
     }
@@ -119,7 +119,7 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
       </div>
     );
@@ -128,11 +128,11 @@ export default function ProfilePage() {
   const menus = menuItems(user || authUser);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-black">
       <Header />
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Profile Header Card */}
-        <div className="bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-600 rounded-lg p-8 mb-8 text-white relative overflow-hidden">
+        <div className="bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-600 rounded-2xl p-8 mb-8 text-white relative overflow-hidden animate-fadeInUp shadow-large">
           <div className="absolute inset-0 bg-black/10"></div>
           <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-6">
             <div className="relative">
@@ -189,7 +189,7 @@ export default function ProfilePage() {
                   </div>
                 )}
               </div>
-              
+
               <div className="space-y-2">
                 {user?.email && (
                   <div className="flex items-center justify-center md:justify-start space-x-2 text-white/90">
@@ -220,12 +220,12 @@ export default function ProfilePage() {
         </div>
 
         {/* Menu Items */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden mb-8">
-          <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-            <h2 className="text-lg font-bold text-gray-900 dark:text-white">Account</h2>
+        <div className="bg-white dark:bg-gray-900/50 rounded-2xl border-2 border-gray-100 dark:border-gray-800 overflow-hidden mb-8 animate-fadeInUp shadow-soft" style={{ animationDelay: '100ms' }}>
+          <div className="p-6 border-b-2 border-gray-100 dark:border-gray-800">
+            <h2 className="text-xl font-bold text-primary-900 dark:text-white">Account</h2>
             <p className="text-sm text-gray-600 dark:text-gray-400">Quick actions & modules</p>
           </div>
-          
+
           <div className="divide-y divide-gray-200 dark:divide-gray-700">
             {menus.map((item, index) => {
               const IconComponent = {
@@ -274,7 +274,7 @@ export default function ProfilePage() {
         {/* Logout Button */}
         <button
           onClick={handleLogout}
-          className="w-full flex items-center justify-center space-x-2 px-6 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-semibold"
+          className="w-full flex items-center justify-center space-x-2 px-6 py-4 bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white rounded-xl transition-all font-bold shadow-glow hover:shadow-glow animate-fadeInUp" style={{ animationDelay: '200ms' }}
         >
           <LogOut className="w-5 h-5" />
           <span>Logout</span>

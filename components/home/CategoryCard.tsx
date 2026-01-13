@@ -48,7 +48,7 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
             </div>
 
             {/* Category Name */}
-            <h3 className="text-lg font-bold text-primary-900 dark:text-white mb-2 transition-all duration-300 group-hover:text-primary-800 dark:group-hover:text-primary-300">
+            <h3 className="text-base font-bold text-primary-900 dark:text-white mb-2 transition-all duration-300 group-hover:text-primary-800 dark:group-hover:text-primary-300 text-center leading-tight">
                 {name}
             </h3>
 

@@ -92,7 +92,7 @@ function MessagesContent() {
         const response = await messagesApi.getConversations();
         const conversationsList = response.data || [];
         setConversations(conversationsList);
-        
+
         // Check if user parameter is passed (for starting new conversation)
         const userId = searchParams.get('user');
         if (userId && !selectedConversation) {
@@ -100,7 +100,7 @@ function MessagesContent() {
           const existingConv = conversationsList.find(
             (c: Conversation) => c.otherUser?.id === userId
           );
-          
+
           if (existingConv) {
             setSelectedConversation(existingConv.id);
           } else {
@@ -157,15 +157,15 @@ function MessagesContent() {
     try {
       // Use sendTextMessage which matches the mobile app's endpoint: /Messages/{conversationId}/text
       await messagesApi.sendTextMessage(selectedConversation, textToSend);
-      
+
       // Refresh messages to show the new message
       const response = await messagesApi.getMessages(selectedConversation);
       setMessages(response.data || []);
-      
+
       // Refresh conversations to update last message
       const convResponse = await messagesApi.getConversations();
       setConversations(convResponse.data || []);
-      
+
       toast.success('Message sent');
     } catch (error: any) {
       // Restore message text on error
@@ -182,28 +182,28 @@ function MessagesContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-black">
       <Header />
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="mb-8 animate-fadeInUp">
+          <h1 className="text-4xl md:text-5xl font-bold text-primary-900 dark:text-white mb-4">
             Messages
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-gray-600 dark:text-gray-400 text-lg">
             Chat with buyers and sellers
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[calc(100vh-300px)]">
           {/* Conversations List */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col">
+          <div className="bg-white dark:bg-gray-900/50 rounded-2xl border-2 border-gray-100 dark:border-gray-800 overflow-hidden flex flex-col shadow-soft">
             <div className="p-4 border-b border-gray-200 dark:border-gray-700">
               <h2 className="font-semibold text-gray-900 dark:text-white">Conversations</h2>
             </div>
@@ -232,11 +232,10 @@ function MessagesContent() {
                       <button
                         key={conversation.id}
                         onClick={() => setSelectedConversation(conversation.id)}
-                        className={`w-full p-4 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${
-                          selectedConversation === conversation.id
+                        className={`w-full p-4 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${selectedConversation === conversation.id
                             ? 'bg-primary-50 dark:bg-primary-900/20 border-l-4 border-primary-500'
                             : ''
-                        }`}
+                          }`}
                       >
                         <div className="flex items-center space-x-3">
                           {profileImage ? (
@@ -281,7 +280,7 @@ function MessagesContent() {
           </div>
 
           {/* Messages */}
-          <div className="lg:col-span-2 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 flex flex-col">
+          <div className="lg:col-span-2 bg-white dark:bg-gray-900/50 rounded-2xl border-2 border-gray-100 dark:border-gray-800 flex flex-col shadow-soft">
             {selectedConversation && selectedConv ? (
               <>
                 {/* Header */}
@@ -342,11 +341,10 @@ function MessagesContent() {
                           className={`flex ${isOwn ? 'justify-end' : 'justify-start'}`}
                         >
                           <div
-                            className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                              isOwn
+                            className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${isOwn
                                 ? 'bg-primary-600 text-white'
                                 : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white'
-                            }`}
+                              }`}
                           >
                             {message.imageUrl && (
                               <Image
@@ -364,9 +362,8 @@ function MessagesContent() {
                             )}
                             <p>{message.content}</p>
                             <p
-                              className={`text-xs mt-1 ${
-                                isOwn ? 'text-primary-100' : 'text-gray-500 dark:text-gray-400'
-                              }`}
+                              className={`text-xs mt-1 ${isOwn ? 'text-primary-100' : 'text-gray-500 dark:text-gray-400'
+                                }`}
                             >
                               {new Date(message.createdAt).toLocaleTimeString()}
                             </p>
@@ -421,7 +418,7 @@ function MessagesContent() {
 export default function MessagesPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
       </div>
     }>

@@ -119,22 +119,24 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-black">
       <Header />
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="mb-12 animate-fadeInUp">
+          <h1 className="text-4xl md:text-5xl font-bold text-primary-900 dark:text-white mb-4">
             Settings
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-gray-600 dark:text-gray-400 text-lg">
             Manage your account settings and preferences
           </p>
         </div>
 
         {/* General Settings */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-            <Bell className="w-5 h-5 mr-2" />
+        <div className="bg-white dark:bg-gray-900/50 rounded-2xl border-2 border-gray-100 dark:border-gray-800 p-6 md:p-8 mb-6 animate-fadeInUp shadow-soft" style={{ animationDelay: '100ms' }}>
+          <h2 className="text-xl font-bold text-primary-900 dark:text-white mb-6 flex items-center gap-3">
+            <div className="p-2.5 bg-gradient-to-br from-primary-100 to-secondary-100 dark:from-primary-900/50 dark:to-secondary-900/50 rounded-xl">
+              <Bell className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+            </div>
             General Settings
           </h2>
           <div className="space-y-4">
@@ -187,9 +189,11 @@ export default function SettingsPage() {
         </div>
 
         {/* Change Password */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-            <Lock className="w-5 h-5 mr-2" />
+        <div className="bg-white dark:bg-gray-900/50 rounded-2xl border-2 border-gray-100 dark:border-gray-800 p-6 md:p-8 mb-6 animate-fadeInUp shadow-soft" style={{ animationDelay: '200ms' }}>
+          <h2 className="text-xl font-bold text-primary-900 dark:text-white mb-6 flex items-center gap-3">
+            <div className="p-2.5 bg-gradient-to-br from-primary-100 to-secondary-100 dark:from-primary-900/50 dark:to-secondary-900/50 rounded-xl">
+              <Lock className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+            </div>
             Change Password
           </h2>
           <div className="space-y-4">
@@ -279,9 +283,11 @@ export default function SettingsPage() {
         </div>
 
         {/* Privacy Settings */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-            <Shield className="w-5 h-5 mr-2" />
+        <div className="bg-white dark:bg-gray-900/50 rounded-2xl border-2 border-gray-100 dark:border-gray-800 p-6 md:p-8 animate-fadeInUp shadow-soft" style={{ animationDelay: '300ms' }}>
+          <h2 className="text-xl font-bold text-primary-900 dark:text-white mb-6 flex items-center gap-3">
+            <div className="p-2.5 bg-gradient-to-br from-primary-100 to-secondary-100 dark:from-primary-900/50 dark:to-secondary-900/50 rounded-xl">
+              <Shield className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+            </div>
             Privacy Settings
           </h2>
           <div className="space-y-4">

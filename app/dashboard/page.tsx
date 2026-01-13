@@ -55,17 +55,17 @@ export default function DashboardPage() {
   useEffect(() => {
     // Removed authentication redirect - page accessible without login
     let interval: NodeJS.Timeout;
-    
+
     const loadData = async () => {
       await fetchData();
       if (isAuthenticated) {
-    giveDailyLoginReward();
+        giveDailyLoginReward();
       }
-    
-    // Auto-refresh every 30 seconds
+
+      // Auto-refresh every 30 seconds
       interval = setInterval(() => {
-      fetchData();
-    }, 30000);
+        fetchData();
+      }, 30000);
     };
 
     loadData();
@@ -102,9 +102,9 @@ export default function DashboardPage() {
 
       const allAds = adsResponse.data || [];
       setAds(allAds);
-      
+
       // Set featured ads (ads with images, first 5)
-      const featured = allAds.filter((ad: Ad) => 
+      const featured = allAds.filter((ad: Ad) =>
         ad.imageUrl || (ad.media && ad.media.length > 0)
       ).slice(0, 5);
       setFeaturedAds(featured);
@@ -155,36 +155,36 @@ export default function DashboardPage() {
   // Filter ads - memoized for performance
   const filteredAds = useMemo(() => {
     return ads.filter((ad) => {
-    const matchesSearch =
-      !searchQuery ||
-      ad.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      ad.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      ad.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      ad.category?.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    const matchesCategory = activeCategory === 'all' || ad.category === activeCategory;
-    
-    return matchesSearch && matchesCategory;
-  });
+      const matchesSearch =
+        !searchQuery ||
+        ad.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        ad.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        ad.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        ad.category?.toLowerCase().includes(searchQuery.toLowerCase());
+
+      const matchesCategory = activeCategory === 'all' || ad.category === activeCategory;
+
+      return matchesSearch && matchesCategory;
+    });
   }, [ads, searchQuery, activeCategory]);
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-black">
       <Header />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 page-transition">
         {/* Welcome Section */}
         <div className="mb-8 animate-fadeInUp">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2 bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+              <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary-900 via-primary-700 to-secondary-600 bg-clip-text text-transparent">
                 Welcome back, {user?.name || 'User'}! 👋
               </h1>
               <p className="text-lg text-gray-600 dark:text-gray-400">
@@ -255,9 +255,8 @@ export default function DashboardPage() {
                         {featuredAds.map((_, i) => (
                           <div
                             key={i}
-                            className={`h-2 rounded-full transition-all ${
-                              i === featuredIndex ? 'w-8 bg-white' : 'w-2 bg-white/50'
-                            }`}
+                            className={`h-2 rounded-full transition-all ${i === featuredIndex ? 'w-8 bg-white' : 'w-2 bg-white/50'
+                              }`}
                           />
                         ))}
                       </div>
@@ -288,11 +287,10 @@ export default function DashboardPage() {
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`px-5 py-2.5 rounded-xl font-semibold whitespace-nowrap transition-all ${
-                  activeCategory === cat.id
+                className={`px-5 py-2.5 rounded-xl font-semibold whitespace-nowrap transition-all ${activeCategory === cat.id
                     ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-glow scale-105'
                     : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 hover:scale-105 active:scale-95'
-                }`}
+                  }`}
               >
                 <span className="mr-2 text-lg">{cat.icon}</span>
                 {cat.name}

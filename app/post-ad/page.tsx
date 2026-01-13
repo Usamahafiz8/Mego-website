@@ -56,7 +56,7 @@ export default function PostAdPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!image) {
       toast.error('Please upload an image');
       return;
@@ -80,7 +80,7 @@ export default function PostAdPage() {
       formDataToSend.append('negotiable', formData.negotiable.toString());
       formDataToSend.append('adType', 'sell');
       formDataToSend.append('image', image);
-      
+
       if (voiceRecording) {
         formDataToSend.append('voiceDescription', voiceRecording);
       }
@@ -96,14 +96,14 @@ export default function PostAdPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-black">
       <Header />
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="mb-12 animate-fadeInUp">
+          <h1 className="text-4xl md:text-5xl font-bold text-primary-900 dark:text-white mb-4">
             Post Your Ad
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-gray-600 dark:text-gray-400 text-lg">
             Quick 3-step process - Photo, Title, Price/Category
           </p>
         </div>
@@ -114,19 +114,17 @@ export default function PostAdPage() {
             {[1, 2, 3].map((s) => (
               <div key={s} className="flex items-center flex-1">
                 <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
-                    step >= s
+                  className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${step >= s
                       ? 'bg-primary-600 text-white'
                       : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
-                  }`}
+                    }`}
                 >
                   {s}
                 </div>
                 {s < 3 && (
                   <div
-                    className={`flex-1 h-1 mx-2 ${
-                      step > s ? 'bg-primary-600' : 'bg-gray-200 dark:bg-gray-700'
-                    }`}
+                    className={`flex-1 h-1 mx-2 ${step > s ? 'bg-primary-600' : 'bg-gray-200 dark:bg-gray-700'
+                      }`}
                   />
                 )}
               </div>
@@ -139,7 +137,7 @@ export default function PostAdPage() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+        <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-900/50 rounded-2xl border-2 border-gray-100 dark:border-gray-800 p-6 md:p-8 shadow-soft animate-fadeInUp" style={{ animationDelay: '200ms' }}>
           {/* Step 1: Photo */}
           {step === 1 && (
             <div className="space-y-6">
